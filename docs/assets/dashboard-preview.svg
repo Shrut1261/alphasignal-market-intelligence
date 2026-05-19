@@ -1,0 +1,78 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1116"/>
+      <stop offset="1" stop-color="#162331"/>
+    </linearGradient>
+    <linearGradient id="lineA" x1="80" y1="380" x2="760" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#35C2FF"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="620" rx="24" fill="url(#bg)"/>
+  <rect x="36" y="34" width="1128" height="552" rx="18" fill="#111A22" stroke="#243241" filter="url(#soft)"/>
+
+  <text x="74" y="86" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="30" font-weight="700">AlphaSignal</text>
+  <text x="74" y="114" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="16">Algorithmic trading intelligence platform</text>
+  <rect x="966" y="62" width="138" height="36" rx="8" fill="#10251F" stroke="#2DD4BF"/>
+  <circle cx="988" cy="80" r="5" fill="#2DD4BF"/>
+  <text x="1002" y="85" fill="#CFFAF1" font-family="Inter, Segoe UI, Arial" font-size="14" font-weight="600">Tests passing</text>
+
+  <g>
+    <rect x="74" y="150" width="244" height="86" rx="10" fill="#0F1720" stroke="#263746"/>
+    <text x="96" y="184" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="15">Sharpe Ratio</text>
+    <text x="96" y="218" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="34" font-weight="700">1.42</text>
+    <path d="M244 211 L260 198 L276 203 L294 184" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="340" y="150" width="244" height="86" rx="10" fill="#0F1720" stroke="#263746"/>
+    <text x="362" y="184" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="15">Max Drawdown</text>
+    <text x="362" y="218" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="34" font-weight="700">-8.6%</text>
+    <path d="M510 184 L528 198 L546 191 L562 211" stroke="#FB7185" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="606" y="150" width="244" height="86" rx="10" fill="#0F1720" stroke="#263746"/>
+    <text x="628" y="184" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="15">Win Rate</text>
+    <text x="628" y="218" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="34" font-weight="700">57%</text>
+    <rect x="778" y="183" width="16" height="32" rx="3" fill="#35C2FF"/>
+    <rect x="800" y="168" width="16" height="47" rx="3" fill="#2DD4BF"/>
+    <rect x="822" y="194" width="16" height="21" rx="3" fill="#35C2FF"/>
+  </g>
+  <g>
+    <rect x="872" y="150" width="232" height="86" rx="10" fill="#0F1720" stroke="#263746"/>
+    <text x="894" y="184" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="15">API p95</text>
+    <text x="894" y="218" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="34" font-weight="700">184ms</text>
+  </g>
+
+  <rect x="74" y="270" width="676" height="246" rx="12" fill="#0F1720" stroke="#263746"/>
+  <text x="104" y="310" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="18" font-weight="700">Strategy Equity Curve</text>
+  <line x1="110" y1="464" x2="704" y2="464" stroke="#263746"/>
+  <line x1="110" y1="404" x2="704" y2="404" stroke="#1E2B38"/>
+  <line x1="110" y1="344" x2="704" y2="344" stroke="#1E2B38"/>
+  <path d="M112 442 C170 420 204 432 246 390 C294 342 332 402 384 350 C436 298 480 336 524 286 C574 232 636 270 704 216" stroke="url(#lineA)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M112 452 C178 438 214 448 256 424 C306 392 356 420 404 386 C452 352 506 372 552 342 C604 306 646 322 704 298" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="704" cy="216" r="8" fill="#2DD4BF"/>
+  <text x="120" y="492" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="13">AlphaSignal</text>
+  <text x="236" y="492" fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="13">SPY Benchmark</text>
+
+  <rect x="782" y="270" width="322" height="246" rx="12" fill="#0F1720" stroke="#263746"/>
+  <text x="812" y="310" fill="#E5EEF7" font-family="Inter, Segoe UI, Arial" font-size="18" font-weight="700">Sentiment Scores</text>
+  <g fill="#2DD4BF">
+    <rect x="826" y="404" width="34" height="62" rx="4"/>
+    <rect x="884" y="374" width="34" height="92" rx="4"/>
+    <rect x="942" y="424" width="34" height="42" rx="4"/>
+    <rect x="1000" y="332" width="34" height="134" rx="4"/>
+    <rect x="1058" y="392" width="34" height="74" rx="4"/>
+  </g>
+  <g fill="#94A3B8" font-family="Inter, Segoe UI, Arial" font-size="12">
+    <text x="826" y="486">AAPL</text>
+    <text x="884" y="486">MSFT</text>
+    <text x="946" y="486">JPM</text>
+    <text x="1000" y="486">NVDA</text>
+    <text x="1060" y="486">SPY</text>
+  </g>
+</svg>

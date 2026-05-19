@@ -1,77 +1,160 @@
 # AlphaSignal
 
-AlphaSignal is a production-shaped algorithmic trading intelligence platform for market data ingestion, feature engineering, sentiment scoring, ML signal generation, backtesting, and dashboard delivery.
+**Algorithmic trading intelligence platform for market data, sentiment, ML signals, portfolio optimization, and backtesting.**
 
-## Current Status
+![AlphaSignal dashboard preview](docs/assets/dashboard-preview.svg)
 
-AlphaSignal is under active development. The public repository currently contains a tested backend foundation plus early vertical slices for ingestion, feature engineering, sentiment scoring, ML metrics, backtesting, and API endpoints. See [docs/roadmap.md](docs/roadmap.md) for the phase-by-phase status.
+[![CI](https://github.com/Shrut1261/alphasignal-market-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/Shrut1261/alphasignal-market-intelligence/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)
+![Next.js](https://img.shields.io/badge/Web-Next.js-111827)
+![Tests](https://img.shields.io/badge/tests-37%20passing-2DD4BF)
 
-## Phase 0 Decisions
+## What This Is
 
-| Decision | Options | Recommendation |
+AlphaSignal is a complete portfolio MVP for a finance-tech interview project. It shows how market data, macro data, sentiment, ML-style signals, portfolio optimization, and backtesting can fit together in one production-shaped platform.
+
+It is intentionally built as a real codebase, not a notebook-only demo:
+
+- typed Python packages with `pydantic`
+- FastAPI service with documented routes
+- Next.js + TypeScript dashboard
+- TimescaleDB-ready schema
+- async ingestion adapters
+- technical indicators
+- sentiment scoring facade
+- ML baseline and metrics
+- backtesting engine with transaction costs and look-ahead controls
+- CI-ready tests, linting, formatting, and type checks
+
+## Product Snapshot
+
+| Area | Status | What Exists |
 | --- | --- | --- |
-| Frontend | Streamlit for speed, Next.js for portfolio polish, both with Streamlit internal prototype | Next.js + TypeScript for public demo credibility |
-| Orchestration | Cron, Airflow, Prefect | Prefect because it is lighter than Airflow and still production-readable |
-| Database | SQLite, Postgres, TimescaleDB | TimescaleDB locally via Docker with Postgres compatibility |
-| API | Flask, FastAPI, Django Ninja | FastAPI for typed schemas, async endpoints, and OpenAPI docs |
-| ML path | scikit baseline, LightGBM, LSTM/TFT | Start with leakage-safe LightGBM, add deep forecasting after backtesting is stable |
+| Backend API | Complete MVP | Health, market overview, signals, backtests, sentiment, portfolio optimization |
+| Dashboard | Complete MVP | KPI cards, equity curve, sentiment chart, platform capability cards |
+| Data Layer | Complete MVP | Yahoo Finance and FRED adapters, TimescaleDB schema, ingestion orchestration |
+| Features | Complete MVP | Returns, RSI, MACD, Bollinger Bands, ATR, OBV |
+| Sentiment | Complete MVP | FinBERT-ready interface with deterministic lexical fallback |
+| ML | Complete MVP | Directional labels, baseline classifier, classification metrics |
+| Backtesting | Complete MVP | Weight-lagged backtest, orders, fills, portfolio state, transaction costs |
+| Quality | Complete MVP | `pytest`, `ruff`, `black`, `mypy`, Next.js build, npm audit |
 
-## Repository Layout
+## Architecture
 
-```text
-apps/api                 FastAPI service
-apps/web                 Next.js dashboard placeholder
-services/ingest          Market/news/macro ingestion flows
-services/features        Technical and statistical features
-services/sentiment       FinBERT/news sentiment pipeline
-services/ml              Model training and signal generation
-services/backtest        Event-driven backtesting engine
-packages/shared          Shared settings, schemas, and logging
-infra/sql                Database bootstrap SQL
-docs                     Architecture and interview notes
-tests                    Cross-package tests
+```mermaid
+flowchart LR
+    providers["Market, macro, news providers"] --> ingest["Ingestion service"]
+    ingest --> db["TimescaleDB / Postgres"]
+    db --> features["Feature engineering"]
+    features --> ml["ML signals"]
+    providers --> sentiment["Sentiment scoring"]
+    sentiment --> ml
+    ml --> backtest["Backtesting engine"]
+    backtest --> api["FastAPI"]
+    ml --> api
+    api --> web["Next.js dashboard"]
 ```
 
-## Local Setup
+## API Surface
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `GET` | `/health` | API health check |
+| `GET` | `/market/overview` | Dashboard-ready market summary |
+| `GET` | `/signals/{ticker}` | Latest signal for a ticker |
+| `POST` | `/backtests` | Run a strategy backtest from returns and signal confidence |
+| `POST` | `/sentiment/{ticker}` | Score a ticker headline |
+| `POST` | `/portfolio/optimize` | Generate inverse-volatility portfolio weights |
+
+## Repository Map
+
+```text
+apps/api                 FastAPI application
+apps/web                 Next.js dashboard
+services/ingest          Yahoo/FRED adapters and ingestion flow
+services/features        Technical indicators
+services/sentiment       FinBERT-ready sentiment layer
+services/ml              Labels, metrics, baseline model, portfolio optimizer
+services/backtest        Metrics, event objects, portfolio state, backtest engine
+packages/shared          Config, schemas, database helpers, logging
+infra/sql                TimescaleDB bootstrap schema
+docs                     Architecture, roadmap, interview notes, visuals
+tests                    Cross-package unit tests
+```
+
+## Run Locally
+
+### Backend
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
 docker compose up -d
-pytest
+python -m pytest
 uvicorn alphasignal_api.main:app --reload --app-dir apps/api/src
 ```
 
-Open `http://localhost:8000/docs` for the API documentation.
+Open:
 
-## API Surface
+```text
+http://localhost:8000/docs
+```
 
-- `GET /health`
-- `GET /market/overview`
-- `GET /signals/{ticker}`
-- `POST /backtests`
-- `POST /sentiment/{ticker}`
-- `POST /portfolio/optimize`
+### Frontend
 
-## Product MVP Status
+```powershell
+cd apps/web
+npm install
+npm run dev
+```
 
-The current repository is a complete portfolio MVP: it has a tested backend, quant/backtest logic, ingestion adapters, ML and sentiment baselines, API routes, and a build-verified dashboard. The remaining work is production deployment and replacing baseline models with heavier live pipelines.
+Open:
 
-## Test Plan
+```text
+http://localhost:3000
+```
 
-- Unit tests validate shared settings, Pydantic schemas, API health, ingestion provider parsing, technical indicators, sentiment scoring, ML metrics, and backtest behavior.
-- CI runs `ruff`, `black --check`, `mypy`, and `pytest`.
-- Later phases add loader integration tests with mocked providers and database contract tests.
+## Verification
 
-## Phase 0 Resume Bullet
+Latest local verification:
 
-Built the production foundation for AlphaSignal, a quantitative trading intelligence platform, using FastAPI, TimescaleDB, Redis, typed Pydantic schemas, pytest, ruff, black, mypy, and CI-ready monorepo architecture.
+```text
+Python tests: 37 passed
+ruff: clean
+black: clean
+mypy: clean
+Next.js typecheck: passed
+Next.js production build: passed
+npm audit: 0 vulnerabilities
+```
+
+## Quant Controls
+
+- Backtest target weights are lagged one period to reduce look-ahead bias.
+- Signal labels use forward returns only for training targets.
+- Strategy costs include turnover-based transaction costs.
+- Database schema is time-series ready through TimescaleDB hypertables.
+- The roadmap separates MVP-complete code from production-live upgrades.
+
+## Roadmap
+
+The portfolio MVP is complete. Production upgrades are tracked in [docs/roadmap.md](docs/roadmap.md):
+
+- deploy API and dashboard
+- add real API keys and scheduled jobs
+- run FinBERT in production mode
+- train and persist LightGBM artifacts
+- add live database-backed dashboard data
+- record demo video and screenshots
+
+## Resume Bullets
+
+- Built **AlphaSignal**, a full-stack algorithmic trading intelligence platform using FastAPI, Next.js, TimescaleDB-ready schemas, typed Python services, and CI-quality testing.
+- Implemented market/macro ingestion adapters, technical indicators, sentiment scoring, ML baseline metrics, portfolio optimization, and a transaction-cost-aware backtesting engine.
+- Delivered a dashboard-ready API and TypeScript frontend with 37 passing backend tests, strict typing, linting, formatting, production web build verification, and zero npm audit vulnerabilities.
 
 ## LinkedIn Snippet
 
-Started building AlphaSignal, a real-time algorithmic trading intelligence platform combining market data, sentiment, ML signals, and backtesting. Phase 0 is complete: typed Python monorepo, FastAPI service, TimescaleDB/Redis infrastructure, shared schemas, quality tooling, and test coverage.
-
-## Phase 1-2 Resume Bullet
-
-Implemented tested AlphaSignal ingestion and feature-engineering slices, including async Yahoo/FRED provider adapters, TimescaleDB-ready persistence contracts, RSI/MACD/Bollinger/ATR/OBV indicators, sentiment baseline scoring, and API-accessible backtest metrics.
+I built AlphaSignal, a quantitative market intelligence platform that combines market data ingestion, technical indicators, sentiment scoring, ML signal baselines, portfolio optimization, and backtesting behind a FastAPI service and Next.js dashboard. The project is fully typed, tested, CI-ready, and designed around interview-relevant finance engineering concepts like Sharpe ratio, drawdown, transaction costs, and look-ahead bias.
