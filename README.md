@@ -2,6 +2,10 @@
 
 AlphaSignal is a production-shaped algorithmic trading intelligence platform for market data ingestion, feature engineering, sentiment scoring, ML signal generation, backtesting, and dashboard delivery.
 
+## Current Status
+
+AlphaSignal is under active development. The public repository currently contains a tested backend foundation plus early vertical slices for ingestion, feature engineering, sentiment scoring, ML metrics, backtesting, and API endpoints. See [docs/roadmap.md](docs/roadmap.md) for the phase-by-phase status.
+
 ## Phase 0 Decisions
 
 | Decision | Options | Recommendation |
@@ -41,9 +45,15 @@ uvicorn alphasignal_api.main:app --reload --app-dir apps/api/src
 
 Open `http://localhost:8000/docs` for the API documentation.
 
+## API Surface
+
+- `GET /health`
+- `GET /signals/{ticker}`
+- `POST /backtests`
+
 ## Test Plan
 
-- Unit tests validate shared settings, Pydantic schemas, API health, and core backtest metrics.
+- Unit tests validate shared settings, Pydantic schemas, API health, ingestion provider parsing, technical indicators, sentiment scoring, ML metrics, and backtest behavior.
 - CI runs `ruff`, `black --check`, `mypy`, and `pytest`.
 - Later phases add loader integration tests with mocked providers and database contract tests.
 
@@ -54,3 +64,7 @@ Built the production foundation for AlphaSignal, a quantitative trading intellig
 ## LinkedIn Snippet
 
 Started building AlphaSignal, a real-time algorithmic trading intelligence platform combining market data, sentiment, ML signals, and backtesting. Phase 0 is complete: typed Python monorepo, FastAPI service, TimescaleDB/Redis infrastructure, shared schemas, quality tooling, and test coverage.
+
+## Phase 1-2 Resume Bullet
+
+Implemented tested AlphaSignal ingestion and feature-engineering slices, including async Yahoo/FRED provider adapters, TimescaleDB-ready persistence contracts, RSI/MACD/Bollinger/ATR/OBV indicators, sentiment baseline scoring, and API-accessible backtest metrics.
