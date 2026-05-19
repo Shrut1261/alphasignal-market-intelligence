@@ -1,0 +1,32 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: alphasignal-timescaledb
+    environment:
+      POSTGRES_DB: alphasignal
+      POSTGRES_USER: alphasignal
+      POSTGRES_PASSWORD: alphasignal
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaledb-data:/var/lib/postgresql/data
+      - ./infra/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alphasignal -d alphasignal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: alphasignal-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  timescaledb-data:
