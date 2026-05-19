@@ -1,5 +1,12 @@
 # AlphaSignal Web
 
-The public dashboard will be built with Next.js, TypeScript, Tailwind, and Recharts or Plotly.
+Next.js + TypeScript dashboard for the public AlphaSignal demo.
 
-Phase 0 keeps this folder as a documented placeholder so the Python data/API foundation can harden first.
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+The dashboard currently uses realistic fixture data while the API matures. The first screen presents portfolio KPIs, an equity curve, sentiment scores, and platform capability cards.

@@ -50,6 +50,8 @@ Open `http://localhost:8000/docs` for the API documentation.
 - `GET /health`
 - `GET /signals/{ticker}`
 - `POST /backtests`
+- `POST /sentiment/{ticker}`
+- `POST /portfolio/optimize`
 
 ## Test Plan
 
