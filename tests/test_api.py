@@ -11,6 +11,15 @@ def test_health_check() -> None:
     assert response.json()["status"] == "ok"
 
 
+def test_market_overview_endpoint() -> None:
+    client = TestClient(app)
+
+    response = client.get("/market/overview")
+
+    assert response.status_code == 200
+    assert "AAPL" in response.json()["universe"]
+
+
 def test_latest_signal_normalizes_ticker() -> None:
     client = TestClient(app)
 

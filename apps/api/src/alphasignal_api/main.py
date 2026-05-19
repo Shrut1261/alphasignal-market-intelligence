@@ -2,7 +2,7 @@ from alphasignal_shared import get_settings
 from alphasignal_shared.logging import configure_logging
 from fastapi import FastAPI
 
-from alphasignal_api.routes import backtests, health, portfolio, sentiment, signals
+from alphasignal_api.routes import backtests, health, market, portfolio, sentiment, signals
 
 settings = get_settings()
 configure_logging(settings.log_level)
@@ -14,6 +14,7 @@ app = FastAPI(
 )
 
 app.include_router(health.router, tags=["health"])
+app.include_router(market.router, prefix="/market", tags=["market"])
 app.include_router(signals.router, prefix="/signals", tags=["signals"])
 app.include_router(backtests.router, prefix="/backtests", tags=["backtests"])
 app.include_router(sentiment.router, prefix="/sentiment", tags=["sentiment"])

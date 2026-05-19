@@ -5,13 +5,13 @@ This roadmap is intentionally honest: the repository will only mark a phase comp
 | Phase | Status | Evidence |
 | --- | --- | --- |
 | Phase 0 - Foundation | Complete | Monorepo, FastAPI, TimescaleDB/Redis Compose, CI, typed shared package, quality gate |
-| Phase 1 - Data Layer | In progress | Yahoo and FRED async adapters, SQL schema, repository write layer, mocked provider tests |
-| Phase 2 - Features and Sentiment | In progress | Technical indicators and lexical sentiment baseline with tests |
-| Phase 3 - ML Models | In progress | Leakage-safe labels and classification metrics baseline |
-| Phase 4 - Backtesting | In progress | Weight-lagged vector backtest, transaction costs, metrics, strategy adapter |
-| Phase 5 - API | In progress | Health, signals, and backtest endpoints |
-| Phase 6 - Frontend | Planned | Next.js dashboard scaffold next |
-| Phase 7 - Deploy and Polish | Planned | Deployment configs and demo assets after API/frontend stabilize |
+| Phase 1 - Data Layer | MVP Complete | Yahoo and FRED async adapters, SQL schema, repository write layer, daily ingestion orchestration |
+| Phase 2 - Features and Sentiment | MVP Complete | Technical indicators, FinBERT-ready facade, lexical fallback with tests |
+| Phase 3 - ML Models | MVP Complete | Leakage-safe labels, directional metrics, deterministic baseline model, portfolio optimizer |
+| Phase 4 - Backtesting | MVP Complete | Weight-lagged vector backtest, event objects, portfolio state, transaction costs |
+| Phase 5 - API | MVP Complete | Health, market overview, signals, sentiment, portfolio, and backtest endpoints |
+| Phase 6 - Frontend | MVP Complete | Next.js dashboard with KPIs, equity curve, sentiment chart, and platform cards |
+| Phase 7 - Deploy and Polish | In progress | Deployment configs and demo assets after API/frontend stabilize |
 
 ## Near-Term Build Order
 

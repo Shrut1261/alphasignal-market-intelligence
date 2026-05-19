@@ -48,10 +48,15 @@ Open `http://localhost:8000/docs` for the API documentation.
 ## API Surface
 
 - `GET /health`
+- `GET /market/overview`
 - `GET /signals/{ticker}`
 - `POST /backtests`
 - `POST /sentiment/{ticker}`
 - `POST /portfolio/optimize`
+
+## Product MVP Status
+
+The current repository is a complete portfolio MVP: it has a tested backend, quant/backtest logic, ingestion adapters, ML and sentiment baselines, API routes, and a build-verified dashboard. The remaining work is production deployment and replacing baseline models with heavier live pipelines.
 
 ## Test Plan
 
